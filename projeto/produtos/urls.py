@@ -11,10 +11,9 @@ from . import views
 app_name = 'produtos'
 
 urlpatterns = [
-    path('prod/', views.get_produtos, name='get_produtos'),
     path('', views.index, name='index'),
-    path("lista_Prod/", ProdutoListView.as_view(), name="lista"),
-    path("novo_Prod/", ProdutoCreateView.as_view(), name="criar"),
-    path("editar_Prod/<int:pk>/", ProdutoUpdateView.as_view(), name="editar"),
-    path("excluir_Prod/<int:pk>/", ProdutoDeleteView.as_view(), name="excluir"),
+    path("lista/", ProdutoListView.as_view(), name="lista"),
+    path("novo/", ProdutoCreateView.as_view(), name="criar"),
+    path("editar/<int:pk>/", ProdutoUpdateView.as_view(), name="editar"),
+    path("excluir/<int:pk>/", ProdutoDeleteView.as_view(), name="excluir"),
 ]
