@@ -4,7 +4,10 @@ from django.shortcuts import render
 from .models import Produto
 from .forms import ProdutoForm
 
-from .forms import ProdutoForm
+from rest_framework.decorators import api_view
+from .serializers import ProdutoSerializer
+from rest_framework.response import Response
+from rest_framework import status
 
 def index(request):
     return render(request, "produtos/index.html")
@@ -36,4 +39,14 @@ class ProdutoDeleteView(DeleteView):
     model = Produto
     template_name = "produtos/excluir.html"
     success_url = reverse_lazy("produtos:lista")
+
+
+@api_view(['GET'])
+def get_produtos(request):
+    if request.method == 'GET':
+        produtos = Produto.objects.all()
+        serializer = ProdutoSerializer(produtos, many=True)
+        return Response(serializer.data)
+
+    return Response(status=status.HTTP_404_NOT_FOUND)
 

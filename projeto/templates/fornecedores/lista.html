@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Fornecedores</title>
+</head>
+<body>
+    <h1>Lista de Fornecedores</h1>
+    <a href="{% url 'fornecedores:criar' %}">Novo Fornecedor</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fornecedor in fornecedores %}
+            <tr>
+                <td>{{ fornecedor.nome }}</td>
+                <td>{{ fornecedor.email }}</td>
+                <td>{{ fornecedor.numeroDeTelefone }}</td>
+                <td>
+                    <a href="{% url 'fornecedores:editar' fornecedor.pk %}">Editar</a>
+                    <a href="{% url 'fornecedores:excluir' fornecedor.pk %}">Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">Nenhum fornecedor cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

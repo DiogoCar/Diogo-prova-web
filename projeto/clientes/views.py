@@ -1,8 +1,28 @@
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.template import loader
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from .forms import ClienteForm 
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
+from django.views import View
+from rest_framework.decorators import api_view
+from .serializers import ClienteSerializer
+from rest_framework.response import Response
+from rest_framework import status
 from .models import Cliente
-from .forms import ClienteForm
+
+@api_view(['GET'])
+def get_clientes(request):
+
+    if request.method == 'GET': 
+       clientes = Cliente.objects.all()
+       serializer = ClienteSerializer(clientes, many=True)
+       return Response(serializer.data)
+
+    return Response(status.HTTP_404_NOT_FOUND)
+
+
+
 
 
 

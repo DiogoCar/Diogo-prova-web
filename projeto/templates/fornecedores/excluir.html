@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excluir Fornecedor</title>
+</head>
+<body>
+    <h1>Excluir Fornecedor</h1>
+    <p>Tem certeza que deseja excluir este fornecedor?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Excluir</button>
+        <a href="{% url 'fornecedores:lista' %}">Cancelar</a>
+    </form>
+</body>
+</html>
